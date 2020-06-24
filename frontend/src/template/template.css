@@ -1,0 +1,17 @@
+.react-icons{
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    padding: 3.5px 4px;
+    height: 100%;
+    color: white;
+}
+
+.react-icons svg {
+    margin: 0 auto;
+}
+
+.marked-as-done {
+    text-decoration: line-through;
+    color: #ccc;
+}
