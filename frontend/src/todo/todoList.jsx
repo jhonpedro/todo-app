@@ -2,36 +2,44 @@ import React from "react"
 import IconButton from "../template/IconButton"
 import { FaCheck, FaTrash, FaUndoAlt } from "react-icons/fa"
 
-export default props => {
-    function renderRows(){
-        const list = props.Todos || []
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
+
+import { changeDone, removeTodo } from "./todoActions"
+
+const TodoList = props => {
+
+    const { changeDone, removeTodo } = props
+
+    function renderRows () {
+        const list = props.list || []
         return list.map(todo => {
             return (
-                <tr key={todo._id} className={ todo.done ? "marked-as-done" : "" }>
+                <tr key={ todo._id } className={ todo.done ? "marked-as-done" : "" }>
                     <td>{ todo.description }</td>
                     <td>
-                        <IconButton style="success mb-1" hide={todo.done}
-                            onClick={()=>{
-                                props.handleMark(todo, true)
-                            }}
+                        <IconButton style="success mb-1" hide={ todo.done }
+                            onClick={ () => {
+                                changeDone(todo, true)
+                            } }
                         >
-                            <FaCheck/>
+                            <FaCheck />
                         </IconButton>
 
-                        <IconButton style="warning mb-1" hide={!todo.done}
-                            onClick={()=>{
-                                props.handleMark(todo, false)
-                            }}
+                        <IconButton style="warning mb-1" hide={ !todo.done }
+                            onClick={ () => {
+                                changeDone(todo, false)
+                            } }
                         >
-                            <FaUndoAlt/>
+                            <FaUndoAlt />
                         </IconButton>
 
-                        <IconButton style="danger mb-1" hide={!todo.done}
-                            onClick={()=> {
-                                props.handleRemove(todo)
-                            }}
+                        <IconButton style="danger mb-1" hide={ !todo.done }
+                            onClick={ () => {
+                                removeTodo(todo)
+                            } }
                         >
-                            <FaTrash/>
+                            <FaTrash />
                         </IconButton>
                     </td>
                 </tr>
@@ -47,7 +55,17 @@ export default props => {
             </tr>
         </thead>
         <tbody>
-            {renderRows()}
+            { renderRows() }
         </tbody>
     </table>)
 }
+
+const mapStateToProps = state => ({
+    list: state.todo.list
+})
+
+const mapDispatchToProps = dispatch => (
+    bindActionCreators({ changeDone, removeTodo }, dispatch)
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)

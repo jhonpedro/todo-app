@@ -5,22 +5,22 @@ import PageHeader from "../template/PageHeader"
 import TodoForm from "./todoForm"
 import TodoList from "./todoList"
 
-export default class Todo extends Component{
+export default class Todo extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             description: "",
-            list: [] 
+            list: []
         }
         this.refresh()
     }
-    
+
     refresh = (description = "") => {
 
         const query = description ? `?text=${description}` : ""
-        Api.get("/" + query).then( res => {
-            this.setState({ description, list: res.data})
+        Api.get("/" + query).then(res => {
+            this.setState({ description, list: res.data })
         })
     }
 
@@ -33,7 +33,7 @@ export default class Todo extends Component{
     }
 
     handleRemove = (todo) => {
-        Api.delete("/" + todo._id).then(()=> {
+        Api.delete("/" + todo._id).then(() => {
             this.refresh(this.state.description)
         })
     }
@@ -41,7 +41,7 @@ export default class Todo extends Component{
     handleAdd = () => {
         Api.post("/", {
             description: this.state.description
-        }).then( () => {
+        }).then(() => {
             this.refresh()
         })
     }
@@ -51,27 +51,26 @@ export default class Todo extends Component{
     }
 
     handleMark = (todo, mark) => {
-        Api.put("/" + todo._id, { done: mark }).then(()=> {
+        Api.put("/" + todo._id, { done: mark }).then(() => {
             this.refresh(this.state.description)
         })
     }
-    
 
-    render(){
+
+    render () {
         return (
             <div>
-                <PageHeader name="Tarefas" small="Cadastro"/>
-                <TodoForm 
-                    value={this.state.description}
-                    handleAdd={this.handleAdd}
-                    handleChange={this.handleChange}
-                    handleSearch={this.handleSearch}
-                    handleClear={this.handleClear}
+                <PageHeader name="Tarefas" small="Cadastro" />
+                <TodoForm
+                    value={ this.state.description }
+                    handleAdd={ this.handleAdd }
+                    handleChange={ this.handleChange }
+                    handleSearch={ this.handleSearch }
+                    handleClear={ this.handleClear }
                 />
                 <TodoList
-                    Todos={this.state.list}
-                    handleRemove={this.handleRemove}
-                    handleMark={this.handleMark}
+                    handleRemove={ this.handleRemove }
+                    handleMark={ this.handleMark }
                 />
             </div>
         );

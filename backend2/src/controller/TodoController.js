@@ -37,6 +37,8 @@ module.exports = {
             if(error) return res.sendStatus(400)
 
             post.done = done
+            
+            post.save()
 
             return res.json(post)
 
