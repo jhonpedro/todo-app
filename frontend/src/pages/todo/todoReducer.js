@@ -1,5 +1,3 @@
-import { search } from "./todoActions"
-
 const INITIAL_STATE = {
     description: "",
     list: []
@@ -12,13 +10,9 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 description: action.payload
             })
-        case "TODO_ADD":
-            return ({
-                ...state,
-                description: ""
-            })
         case "TODO_SEARCHED":
             return ({
+                ...state,
                 list: action.payload.data
             })
         case "TODO_CLEAR":

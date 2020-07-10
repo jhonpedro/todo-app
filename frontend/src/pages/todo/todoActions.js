@@ -10,38 +10,40 @@ export const search = (text = "") => {
 
     if (text) searchQuery += "?text=" + text
 
-    const res = Api.get(searchQuery)
-    return ({
-        type: "TODO_SEARCHED",
-        payload: res
-    })
+    return dispatch => (
+        Api.get(searchQuery)
+            .then(res => dispatch({
+                type: "TODO_SEARCHED",
+                payload: res
+            }))
+    )
 }
 
 export const add = description => {
     return dispatch => {
         Api.post("/", { description })
-            .then(dispatch({type: "TODO_ADD"}))
-            .then(dispatch(search()))
+            .then(res => dispatch(clear()))
+            .then(res => dispatch(search()))
     }
 }
 
 export const changeDone = (todo, done) => {
     return dispatch => {
         Api.put("/" + todo._id, { done })
-            .then(dispatch({ type: "TODO_DONE" }))
-            .then(dispatch(search()))
+            .then(res => dispatch({ type: "TODO_DONE" }))
+            .then(res => dispatch(search()))
     }
 }
 
 export const removeTodo = todo => {
     return dispatch => {
         Api.delete("/" + todo._id)
-            .then(dispatch(search()))
+            .then(res => dispatch(search()))
     }
 }
 
 export const clear = () => {
-    return ({
+    return [{
         type: "TODO_CLEAR"
-    })
+    }, search()]
 }
