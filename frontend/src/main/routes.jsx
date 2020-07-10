@@ -1,8 +1,8 @@
 import React from "react"
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 
-import Todo from "../todo/todo"
-import About from "../about/about"
+import Todo from "../pages/todo/todo"
+import About from "../pages/about/about"
 
 export default props => (
     <div className="container">

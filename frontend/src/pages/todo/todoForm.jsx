@@ -1,11 +1,12 @@
 import React from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import Grid from "../template/Grid"
-import IconButton from "../template/IconButton"
-import { FaPlus, FaSearch, FaEraser } from "react-icons/fa"
+import Grid from "../../components/Grid"
 
 import { changeDescription, search, add, clear } from "./todoActions"
+
+import IconButton from "../../components/IconButton"
+import { FaPlus, FaSearch, FaEraser } from "react-icons/fa"
 
 class TodoForm extends React.Component {
 

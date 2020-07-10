@@ -1,5 +1,5 @@
 import React from "react"
-import IconButton from "../template/IconButton"
+import IconButton from "../../components/IconButton"
 import { FaCheck, FaTrash, FaUndoAlt } from "react-icons/fa"
 
 import { connect } from "react-redux"

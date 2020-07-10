@@ -1,7 +1,7 @@
 import React, { Component } from "react"
-import Api from "../services/api"
+import Api from "../../services/api"
 
-import PageHeader from "../template/PageHeader"
+import PageHeader from "../../components/PageHeader"
 import TodoForm from "./todoForm"
 import TodoList from "./todoList"
 

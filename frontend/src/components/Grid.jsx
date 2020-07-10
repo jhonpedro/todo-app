@@ -14,9 +14,7 @@ export default class Grid extends Component {
         let classes = ""
         
         if(colNumbers[0]) classes += `col-xs-${colNumbers[0]}`
-        if(colNumbers[1]) classes += ` col-sm-${colNumbers[1]}`
-        if(colNumbers[1]) classes += ` col-md-${colNumbers[1]}`
-        if(colNumbers[1]) classes += ` col-lg-${colNumbers[1]}`
+        if(colNumbers[1]) classes += ` col-sm-${colNumbers[1]} col-md-${colNumbers[1]} col-lg-${colNumbers[1]}`
 
         return classes
     }
